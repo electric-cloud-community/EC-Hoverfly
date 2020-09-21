@@ -1,0 +1,98 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call pdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'EC-Hoverfly'
+  version: '1.0.0'
+  description: 'An integration with Hoverfly'
+  author: 'Dmitriy Shamatrin'
+  supportUrl: 'none'
+  category: 'Utilities'
+  shell: 'ec-perl'
+
+# Plugin configuration description
+configuration:
+  # This is a shell used for checking connection
+  shell: 'ec-perl'
+  # A script for checking connection will be generated
+  checkConnection: 'true'
+  # A set of fields will be added to process debug level in the configuration
+  hasDebugLevel: true
+  parameters:
+  -
+    name: config
+    documentation: The name for the created configuration
+    required: true
+    type: entry
+    label: Configuration Name
+  -
+    name: desc
+    documentation: Description for the configuration
+    required: false
+    type: entry
+    label: Description
+  -
+    name: endpoint
+    documentation: Third-party endpoint to connect to.
+    required: false
+    type: entry
+    label: Endpoint
+    defaultValue: 'http://127.0.0.1:8888'
+
+procedures:
+-
+  name: 'Switch'
+  description: 'Sample procedure description'
+  # configuration field will be generated automatically
+  hasConfig: true
+  parameters:
+  -
+    name: hoverflyMode
+    documentation: Mode to switch
+    required: true
+    type: entry
+    label: Mode to Switch
+  -
+    name: hoverflyArgs
+    documentation: 'Arguments that will be provided to mode switch. For example, for stateful capture one can use: {"stateful": true}.'
+    required: true
+    type: entry
+    label: Arguments to be provided to switch command in JSON format.
+  outputParameters:
+    'Hoverfly Mode': 'A mode of Hoverfly.'
+-
+  name: 'Export Simulation'
+  description: 'Exports into file simulation.'
+  # configuration field will be generated automatically
+  hasConfig: true
+  parameters:
+  -
+    name: simulationFilePath
+    documentation: A path to file where simulation should be stored.
+    required: true
+    type: entry
+    label: Export File Path
+  -
+    name: overwriteSimulation
+    documentation: "If checked, simulation file will be overwritten if it is exists."
+    required: true
+    checkedValue: 1
+    uncheckedValue: 0
+    initiallyChecked: 0
+    type: checkbox
+    label: Overwrite Simulation File?
+  outputParameters:
+    'Simulation Content': 'A content of simulation.json'
+-
+  name: 'Import Simulation'
+  description: 'Imports simulation.json into the running hoverfly instance.'
+  # configuration field will be generated automatically
+  hasConfig: true
+  parameters:
+  -
+    name: simulationFilePath
+    documentation: A file that contains simulation to be imported.
+    required: true
+    type: entry
+    label: Import File Path
+
