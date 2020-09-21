@@ -55,7 +55,7 @@ procedures:
   -
     name: hoverflyArgs
     documentation: 'Arguments that will be provided to mode switch. For example, for stateful capture one can use: {"stateful": true}.'
-    required: true
+    required: false
     type: entry
     label: Arguments to be provided to switch command in JSON format.
   outputParameters:
